@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Log In</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div>
+  <img src="../assets/icon/ademco.png" style="display: block;margin-left: auto;margin-right: auto; width:75%;">
+</div>
+  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+    <ion-item lines="full">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-input type="text" [(ngModel)]="username" formControlName="username" placeholder="Email/Phone Numbers"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-icon name="key-outline"></ion-icon>
+      <ion-input type="password" [(ngModel)]="password" formControlName="password" placeholder="Password"></ion-input>
+    </ion-item>
+
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" expand="block" disabled={{buttonDisabled}}>Sign In</ion-button>
+        <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password? </a>or
+        <a [routerLink]="['/registration']" class="small-text">Register?</a>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

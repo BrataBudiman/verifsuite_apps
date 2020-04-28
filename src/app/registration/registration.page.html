@@ -1,0 +1,95 @@
+<ion-progress-bar [hidden]="!isSubmitted" type="indeterminate"></ion-progress-bar>
+<!-- <ion-progress-bar type="indeterminate"></ion-progress-bar> -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-segment color="secondary" [(ngModel)]="regOpt">
+        <ion-segment-button value="phoneOpt">
+            <ion-icon name="call"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="emailOpt">
+            <ion-icon name="mail"></ion-icon>
+        </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="regOpt">
+        <ion-list *ngSwitchDefault>
+            <form [formGroup]="registrationFormPhone" (ngSubmit)="submitFormPhone()" novalidate>
+                <ion-item>
+                    <ion-label>Country/Region</ion-label>
+                    <ion-select ok-text="Select" cancel-text="Cancel" [(ngModel)] = "countrySelected" formControlName="countrySelected">
+                        <ion-select-option *ngFor="let c of countryData" value="{{c.dial_code}}">{{c.dial_code}} {{c.name}} </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item lines="full">
+                    <ion-label position="floating">Username</ion-label>
+                    <ion-input type="text" [(ngModel)]="username" formControlName="username" required></ion-input>
+                </ion-item>
+
+                <ion-item lines="full">
+                    <ion-label position="floating">Phone Number</ion-label>
+                    <ion-input type="text" [(ngModel)]="phone" formControlName="phone" required></ion-input>
+                </ion-item>
+
+                <ion-item lines="full">
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="password" formControlName="password" required></ion-input>
+                </ion-item>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-button type="submit" color="primary" expand="block"
+                            >Sign Up</ion-button
+                        >
+                        <ion-button
+                            [routerLink]="['/home']"
+                            expand="block"
+                            color="danger"
+                            >Cancel</ion-button
+                        >
+                    </ion-col>
+                </ion-row>
+            </form>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'emailOpt'">
+            <form [formGroup]="registrationFormEmail" (ngSubmit)="submitFormEmail()" novalidate>
+                <ion-item lines="full">
+                    <ion-label position="floating">Username</ion-label>
+                    <ion-input type="text" [(ngModel)]="username" formControlName="username" required></ion-input>
+                </ion-item>
+
+                <ion-item lines="full">
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input type="email" [(ngModel)]="email" formControlName="email" required></ion-input>
+                </ion-item>
+
+                <ion-item lines="full">
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="password" formControlName="password" required></ion-input>
+                </ion-item>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-button type="submit" color="primary" expand="block"
+                            >Sign Up</ion-button
+                        >
+                        <ion-button
+                            [routerLink]="['/home']"
+                            expand="block"
+                            color="danger"
+                            >Cancel</ion-button
+                        >
+                    </ion-col>
+                </ion-row>
+            </form>
+        </ion-list>
+    </div>
+</ion-content>
